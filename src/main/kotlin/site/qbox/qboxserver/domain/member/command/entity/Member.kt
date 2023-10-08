@@ -12,8 +12,9 @@ class Member(
     @Column(nullable = false, unique = true) var nickname: String,
     @Column(nullable = false) var password: String,
     passwordEncoder: PasswordEncoder,
-    ) {
+) {
     val role: Set<Role> = setOf(Role.USER)
+
     init {
         this.password = passwordEncoder.encode(password)
     }
