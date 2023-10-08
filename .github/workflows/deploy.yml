@@ -32,9 +32,9 @@ jobs:
           username: ${{ secrets.QBOX_USER }}
           key: ${{ secrets.QBOX_SERVER_KEY }}
           script: |
-            cd server
+            cd server/build/libs
             sudo kill $(sudo lsof -t -i:8080)
-            nohup java -jar back-0.0.1-SNAPSHOT.jar 1>nohup/stdout.txt 2>nohup/stderr.txt &
+            nohup java -jar qbox-server-0.0.1-SNAPSHOT.jar 1>nohup/stdout.txt 2>nohup/stderr.txt &
             
             sudo service nginx restart
 
