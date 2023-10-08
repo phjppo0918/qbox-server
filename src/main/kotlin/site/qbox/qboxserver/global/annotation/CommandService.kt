@@ -1,0 +1,10 @@
+package xyz.questionbox.back.global.annotation
+
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+
+@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+@Service
+@Transactional
+annotation class CommandService
