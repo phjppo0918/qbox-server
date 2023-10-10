@@ -1,0 +1,19 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+= Q BOX
+
+= members
+[[resources-members]]
+
+== 회원가입
+=== HTTP request
+include::{snippets}/signup/http-request.adoc[]
+=== HTTP response
+include::{snippets}/signup/http-response.adoc[]

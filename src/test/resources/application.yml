@@ -36,3 +36,7 @@ spring:
         format_sql: true
         show_sql: true
 
+logging:
+  slack:
+    webhook-uri: dsafadsf
+  config: classpath:logback-spring.xml

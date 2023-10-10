@@ -23,7 +23,6 @@ configurations {
         extendsFrom(configurations.annotationProcessor.get())
     }
 }
-val asciidoctorExt: Configuration by configurations.creating
 extra["snippetsDir"] = file("build/generated-snippets")
 
 repositories {
@@ -36,7 +35,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("com.github.maricn:logback-slack-appender:1.6.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    
+
     //kotlin
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -62,7 +61,6 @@ dependencies {
     // rest docs
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("org.springframework.restdocs:spring-restdocs-asciidoctor")
-    asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
 
     //kotest
     testImplementation("io.kotest:kotest-runner-junit5:5.6.2")
@@ -86,26 +84,54 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+//docs setting
+tasks {
+    val snippetsDir = file("$buildDir/generated-snippets")
 
-val snippetsDir  by extra { file("build/generated-snippets") }
+    clean {
+        delete("src/main/resources/static/docs")
+    }
 
+    test {
+        useJUnitPlatform()
+        systemProperty("org.springframework.restdocs.outputDir", snippetsDir)
+        outputs.dir(snippetsDir)
+    }
 
-tasks.test {
-    outputs.dir(snippetsDir)
-}
+    build {
+        dependsOn("copyDocument")
+    }
 
-tasks.asciidoctor {
-    inputs.dir(snippetsDir)
-    configurations("asciidoctorExt")
-    dependsOn(tasks.test)
-    doLast {
-        copy {
-            from("build/docs/asciidoc")
+    asciidoctor {
+        dependsOn(test)
+
+        attributes(
+            mapOf("snippets" to snippetsDir)
+        )
+        inputs.dir(snippetsDir)
+
+        doFirst {
+            delete("src/main/resources/static/docs")
+        }
+    }
+
+    register<Copy>("copyDocument") {
+        dependsOn(asciidoctor)
+
+        destinationDir = file(".")
+        from(asciidoctor.get().outputDir) {
             into("src/main/resources/static/docs")
         }
     }
-}
 
+    bootJar {
+        dependsOn(asciidoctor)
+
+        from(asciidoctor.get().outputDir) {
+            into("BOOT-INF/classes/static/docs")
+        }
+    }
+}
 
 buildscript {
     repositories {
@@ -136,7 +162,7 @@ koverReport {
             isEnabled = true
             entity = kotlinx.kover.gradle.plugin.dsl.GroupingEntityType.APPLICATION
             bound {
-                minValue = 90
+                minValue = 100
                 metric = kotlinx.kover.gradle.plugin.dsl.MetricType.INSTRUCTION
                 aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
             }
@@ -145,7 +171,7 @@ koverReport {
             isEnabled = true
             entity = kotlinx.kover.gradle.plugin.dsl.GroupingEntityType.CLASS
             bound {
-                minValue = 90
+                minValue = 100
                 metric = kotlinx.kover.gradle.plugin.dsl.MetricType.BRANCH
                 aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
             }
@@ -155,7 +181,7 @@ koverReport {
             isEnabled = true
             entity = kotlinx.kover.gradle.plugin.dsl.GroupingEntityType.CLASS
             bound {
-                minValue = 90
+                minValue = 100
                 metric = kotlinx.kover.gradle.plugin.dsl.MetricType.LINE
                 aggregation = kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
             }
