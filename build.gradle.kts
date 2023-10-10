@@ -151,11 +151,13 @@ kover {
 koverReport {
     filters {
         includes {
-            classes("site.qbox.qboxserver.*")
+            classes("**.*")
         }
         excludes {
-            classes("site.qbox.qboxserver.QboxServerApplicationKt")
-            classes("site.qbox.qboxserver.**Config")
+            classes("**.QboxServerApplicationKt")
+            classes("**.**Config")
+            classes("**.Mail**")
+            classes("**.dto.**")
         }
     }
     verify {
