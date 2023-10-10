@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "3.1.4"
     id("io.spring.dependency-management") version "1.1.3"
     id("org.jetbrains.kotlinx.kover") version "0.7.3"
+    id("org.asciidoctor.jvm.convert") version "3.3.2"
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
     kotlin("plugin.jpa") version "1.8.22"
@@ -22,7 +23,7 @@ configurations {
         extendsFrom(configurations.annotationProcessor.get())
     }
 }
-
+val asciidoctorExt: Configuration by configurations.creating
 extra["snippetsDir"] = file("build/generated-snippets")
 
 repositories {
@@ -41,16 +42,16 @@ dependencies {
     implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
     implementation("com.github.maricn:logback-slack-appender:1.6.1")
     kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
-    compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.mysql:mysql-connector-j")
-    annotationProcessor("org.projectlombok:lombok")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation("org.springframework.restdocs:spring-restdocs-asciidoctor")
+    asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
     testRuntimeOnly("com.h2database:h2")
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:mysql")
 
     testImplementation("io.kotest:kotest-runner-junit5:5.6.2")
     testImplementation("io.kotest:kotest-assertions-core:5.6.2")
@@ -70,6 +71,27 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+
+val snippetsDir  by extra { file("build/generated-snippets") }
+
+
+tasks.test {
+    outputs.dir(snippetsDir)
+}
+
+tasks.asciidoctor {
+    inputs.dir(snippetsDir)
+    configurations("asciidoctorExt")
+    dependsOn(tasks.test)
+    doLast {
+        copy {
+            from("build/docs/asciidoc")
+            into("src/main/resources/static/docs")
+        }
+    }
+}
+
 
 buildscript {
     repositories {
