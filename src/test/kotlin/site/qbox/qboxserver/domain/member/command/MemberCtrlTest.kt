@@ -1,7 +1,6 @@
 package site.qbox.qboxserver.domain.member.command
 
 import org.junit.jupiter.api.DisplayName
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -9,7 +8,6 @@ import site.qbox.qboxserver.config.WebClientDocsTest
 import site.qbox.qboxserver.domain.member.command.dto.SignUpReq
 import site.qbox.qboxserver.domain.member.command.svc.MemberSvc
 
-@WebMvcTest(MemberCtrl::class)
 @DisplayName("MemberCtrl")
 class MemberCtrlTest : WebClientDocsTest() {
     @MockBean

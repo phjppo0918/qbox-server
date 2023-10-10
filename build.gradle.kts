@@ -155,6 +155,7 @@ koverReport {
         }
         excludes {
             classes("site.qbox.qboxserver.QboxServerApplicationKt")
+            classes("site.qbox.qboxserver.**Config")
         }
     }
     verify {

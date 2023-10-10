@@ -6,12 +6,14 @@ import io.kotest.extensions.spring.SpringExtension
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
 import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActions
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart
 import java.nio.charset.StandardCharsets
 
 @WebMvcTest
@@ -34,5 +36,14 @@ abstract class WebClientDocsTest : DescribeSpec() {
 
         return mockMvc.perform(requestBuilder)
     }
+    protected fun performFormData(method: HttpMethod, endpoint: String, filename: String): ResultActions {
+        return mockMvc.perform(
+            multipart(method, endpoint)
+                .file(filename, ByteArray(0))
+                .with(csrf())
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .characterEncoding(StandardCharsets.UTF_8))
+    }
+
     private fun generateBody(obj: Any) = mapper.writeValueAsString(obj)
 }
