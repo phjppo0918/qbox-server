@@ -24,5 +24,5 @@ class MemberSvc(
     }
 
     private fun generatePassword() = UUID.randomUUID().toString().substring(0, 8)
-    
+
 }

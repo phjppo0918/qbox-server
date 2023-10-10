@@ -8,9 +8,9 @@ import site.qbox.qboxserver.domain.member.command.svc.MemberSvc
 
 @RestController
 @RequestMapping("members")
-class MemberCtrl (
+class MemberCtrl(
     private val memberSvc: MemberSvc,
-){
+) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun post(@RequestBody @Valid signUpReq: SignUpReq) = memberSvc.signUp(signUpReq)

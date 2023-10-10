@@ -11,11 +11,11 @@ import site.qbox.qboxserver.domain.member.command.dto.event.SignedUpMemberEvent
 @Service
 class MailSvc(
     private val mailSender: JavaMailSender,
-){
+) {
     @Async
     @TransactionalEventListener
     fun sendPassword(event: SignedUpMemberEvent) {
-        val memeMessage : MimeMessage = mailSender.createMimeMessage()
+        val memeMessage: MimeMessage = mailSender.createMimeMessage()
         generateMailContent(memeMessage, event)
         mailSender.send(memeMessage)
     }
