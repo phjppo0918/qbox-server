@@ -13,6 +13,6 @@ class MemberCtrl(
 ) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun post(@RequestBody @Valid signUpReq: SignUpReq) = memberSvc.signUp(signUpReq)
+    fun post(@RequestBody @Valid req: SignUpReq) = memberSvc.signUp(req)
 
 }
