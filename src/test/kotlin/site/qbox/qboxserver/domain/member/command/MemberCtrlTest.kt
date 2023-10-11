@@ -1,8 +1,8 @@
 package site.qbox.qboxserver.domain.member.command
 
 import org.junit.jupiter.api.DisplayName
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import org.springframework.restdocs.payload.PayloadDocumentation.requestFields
@@ -11,6 +11,7 @@ import site.qbox.qboxserver.config.WebClientDocsTest
 import site.qbox.qboxserver.domain.member.command.dto.SignUpReq
 import site.qbox.qboxserver.domain.member.command.svc.MemberSvc
 
+@WebMvcTest(MemberCtrl::class)
 @DisplayName("MemberCtrl")
 class MemberCtrlTest : WebClientDocsTest() {
     @MockBean
@@ -23,14 +24,15 @@ class MemberCtrlTest : WebClientDocsTest() {
 
             action.andExpect(status().isCreated())
 
-            action.andDo(document("signup",
-                getDocumentRequest(),
-                getDocumentResponse(),
-                requestFields(
-                    fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
-                    fieldWithPath("nickname").type(JsonFieldType.STRING).description("닉네임"),
+            action.andDo(
+                print(
+                    "signup",
+                    requestFields(
+                        fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                        fieldWithPath("nickname").type(JsonFieldType.STRING).description("닉네임"),
+                    )
                 )
-            ))
+            )
         }
     }
 }

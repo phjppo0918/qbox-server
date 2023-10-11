@@ -5,20 +5,24 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.extensions.spring.SpringExtension
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
+import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
 import org.springframework.restdocs.operation.preprocess.Preprocessors.*
+import org.springframework.restdocs.snippet.Snippet
 import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActions
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart
 import java.nio.charset.StandardCharsets
 
-
-@WebMvcTest
+@ContextConfiguration
+@AutoConfigureMockMvc
 @AutoConfigureRestDocs
 @WithMockUser(username = "defaultUser")
 abstract class WebClientDocsTest : DescribeSpec() {
@@ -38,6 +42,10 @@ abstract class WebClientDocsTest : DescribeSpec() {
 
         return mockMvc.perform(requestBuilder)
     }
+
+    protected fun performGet(endpoint: String) : ResultActions {
+        return mockMvc.perform(get(endpoint))
+    }
     protected fun performFormData(method: HttpMethod, endpoint: String, filename: String): ResultActions {
         return mockMvc.perform(
             multipart(method, endpoint)
@@ -48,6 +56,10 @@ abstract class WebClientDocsTest : DescribeSpec() {
     }
 
     private fun generateBody(obj: Any) = mapper.writeValueAsString(obj)
+
+    protected fun print(title: String, vararg snippets: Snippet) =
+        document(title, getDocumentRequest(), getDocumentResponse(), *snippets)
+
 
     protected fun getDocumentRequest() = preprocessRequest(prettyPrint())
     protected fun getDocumentResponse() = preprocessResponse(prettyPrint())
