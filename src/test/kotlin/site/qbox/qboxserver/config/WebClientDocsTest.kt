@@ -9,12 +9,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
+import org.springframework.restdocs.operation.preprocess.Preprocessors.*
 import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActions
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart
 import java.nio.charset.StandardCharsets
+
 
 @WebMvcTest
 @AutoConfigureRestDocs
@@ -46,4 +48,7 @@ abstract class WebClientDocsTest : DescribeSpec() {
     }
 
     private fun generateBody(obj: Any) = mapper.writeValueAsString(obj)
+
+    protected fun getDocumentRequest() = preprocessRequest(prettyPrint())
+    protected fun getDocumentResponse() = preprocessResponse(prettyPrint())
 }

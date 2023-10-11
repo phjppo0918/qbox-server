@@ -15,5 +15,6 @@ endif::[]
 == 회원가입
 === HTTP request
 include::{snippets}/signup/http-request.adoc[]
+include::{snippets}/signup/request-fields.adoc[]
 === HTTP response
 include::{snippets}/signup/http-response.adoc[]

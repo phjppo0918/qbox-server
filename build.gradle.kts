@@ -98,10 +98,6 @@ tasks {
         outputs.dir(snippetsDir)
     }
 
-    build {
-        dependsOn("copyDocument")
-    }
-
     asciidoctor {
         dependsOn(test)
 
