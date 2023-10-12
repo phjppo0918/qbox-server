@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
@@ -32,6 +33,10 @@ class SecurityConfig(
                 it.usernameParameter("email")
                 it.passwordParameter("password")
                 it.successHandler(authenticationSuccessHandler())
+            }
+            .logout {
+                it.logoutUrl("/logout")
+                it.logoutSuccessHandler(logoutSuccessHandler())
             }
             .cors { it.configurationSource(corsConfig()) }
             .csrf { it.disable() }
@@ -57,6 +62,13 @@ class SecurityConfig(
         AuthenticationSuccessHandler { _, res, _ ->
             res.status = HttpServletResponse.SC_OK
         }
+
+    @Bean
+    fun logoutSuccessHandler() =
+        LogoutSuccessHandler { _, res, _ ->
+            res.status = HttpServletResponse.SC_OK
+        }
+
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {
