@@ -12,6 +12,6 @@ class MemberQueryCtrl(
     private val memberDao: MemberDao,
 ) {
     @GetMapping("me")
-    fun getMe(auth: Authentication) : MemberRes =
+    fun getMe(auth: Authentication): MemberRes =
         memberDao.getByEmail(auth.name)
 }
