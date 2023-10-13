@@ -6,7 +6,7 @@ import site.qbox.qboxserver.domain.member.command.MemberRepo
 import site.qbox.qboxserver.domain.member.command.dto.SignUpReq
 import site.qbox.qboxserver.domain.member.command.dto.event.SignedUpMemberEvent
 import site.qbox.qboxserver.domain.member.command.entity.Member
-import xyz.questionbox.back.global.annotation.CommandService
+import site.qbox.qboxserver.global.annotation.CommandService
 import java.util.*
 
 

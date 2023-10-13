@@ -3,7 +3,7 @@ package site.qbox.qboxserver.domain.question.command
 import site.qbox.qboxserver.domain.question.command.dto.CreateQuestionReq
 import site.qbox.qboxserver.domain.question.command.entity.Question
 import site.qbox.qboxserver.global.dto.IdRes
-import xyz.questionbox.back.global.annotation.CommandService
+import site.qbox.qboxserver.global.annotation.CommandService
 
 @CommandService
 class QuestionSvc(
