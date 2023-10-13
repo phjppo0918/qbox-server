@@ -6,10 +6,8 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldNotBeBlank
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.security.crypto.password.PasswordEncoder
 import site.qbox.qboxserver.domain.member.command.MemberRepo
 import site.qbox.qboxserver.domain.member.command.dto.SignUpReq
-import site.qbox.qboxserver.domain.member.command.entity.Member
 
 
 @SpringBootTest
@@ -18,6 +16,7 @@ internal class MemberSvcTest : DescribeSpec() {
 
     @Autowired
     lateinit var memberSvc: MemberSvc
+
     @Autowired
     lateinit var memberRepo: MemberRepo
 
@@ -26,7 +25,7 @@ internal class MemberSvcTest : DescribeSpec() {
             val request = SignUpReq("adsf@naver.com", "별명")
             it("회원가입을 수행한다") {
                 memberSvc.signUp(request)
-                val savedMember =  memberRepo.findById(request.email).get()
+                val savedMember = memberRepo.findById(request.email).get()
 
                 savedMember.nickname shouldBe request.nickname
                 savedMember.password.shouldNotBeBlank()

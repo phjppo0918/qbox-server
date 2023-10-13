@@ -10,7 +10,7 @@ import site.qbox.qboxserver.domain.member.command.exception.NotMatchPasswordExce
 
 @DisplayName("member")
 class MemberTest : DescribeSpec({
-    val initPassword = "adsf";
+    val initPassword = "adsf"
     val emailDomain = "tukorea.ac.kr"
     lateinit var member: Member
     val passwordEncoder = BCryptPasswordEncoder()

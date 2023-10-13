@@ -1,19 +1,19 @@
-package site.qbox.qboxserver.domain.lecture.command
+package site.qbox.qboxserver.domain.univ.command
 
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import site.qbox.qboxserver.domain.lecture.command.dto.CreateLectureReq
+import site.qbox.qboxserver.domain.univ.command.dto.CreateUnivReq
 import site.qbox.qboxserver.global.dto.IdRes
 
 @RestController
-@RequestMapping("lectures")
-class LectureCtrl(
-    private val lectureSvc: LectureSvc,
+@RequestMapping("univ")
+class UnivCtrl(
+    private val univSvc: UnivSvc,
 ) {
     @PostMapping
-    fun createLecture(@RequestBody @Valid req: CreateLectureReq): IdRes<String> =
-        lectureSvc.create(req)
+    fun createUniv(@RequestBody @Valid req: CreateUnivReq): IdRes<String> =
+        univSvc.create(req)
 }
