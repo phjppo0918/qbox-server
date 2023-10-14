@@ -5,6 +5,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import org.springframework.security.crypto.password.PasswordEncoder
 import site.qbox.qboxserver.domain.member.command.exception.NotMatchPasswordException
+import site.qbox.qboxserver.global.entity.BaseEntity
 
 @Entity
 class Member(
@@ -12,7 +13,7 @@ class Member(
     @Column(nullable = false, unique = true) var nickname: String,
     @Column(nullable = false) var password: String,
     passwordEncoder: PasswordEncoder,
-) {
+) : BaseEntity() {
     val role: Set<Role> = setOf(Role.USER)
 
     init {
