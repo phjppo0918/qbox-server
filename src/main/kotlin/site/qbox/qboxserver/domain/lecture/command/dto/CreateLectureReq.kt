@@ -5,5 +5,5 @@ import jakarta.validation.constraints.NotBlank
 data class CreateLectureReq(
     @NotBlank val code: String,
     @NotBlank val name: String,
-    @NotBlank val departId: String,
+    @NotBlank val departId: Long,
 )
