@@ -13,6 +13,7 @@ endif::[]
 == 학과 생성
 
 === HTTP request
+
 include::{snippets}/create-depart/http-request.adoc[]
 include::{snippets}/create-depart/request-fields.adoc[]
 
@@ -24,7 +25,9 @@ include::{snippets}/create-depart/response-fields.adoc[]
 = lectures
 
 == 강의 생성
+
 === HTTP request
+
 include::{snippets}/create-lecture/http-request.adoc[]
 include::{snippets}/create-lecture/request-fields.adoc[]
 
