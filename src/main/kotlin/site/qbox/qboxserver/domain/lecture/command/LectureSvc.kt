@@ -9,6 +9,6 @@ class LectureSvc(
     private val lectureRepo: LectureRepo,
 ) {
     fun create(req: CreateLectureReq) {
-        lectureRepo.save(Lecture(req.code,req.departId, req.name))
+        lectureRepo.save(Lecture(req.code, req.departId, req.name))
     }
 }
