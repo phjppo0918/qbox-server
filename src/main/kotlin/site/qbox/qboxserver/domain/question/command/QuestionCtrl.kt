@@ -1,11 +1,9 @@
 package site.qbox.qboxserver.domain.question.command
 
 import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
 import org.springframework.security.core.Authentication
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import site.qbox.qboxserver.domain.question.command.dto.CreateQuestionReq
 import site.qbox.qboxserver.global.dto.IdRes
 
@@ -15,6 +13,7 @@ class QuestionCtrl(
     private val questionSvc: QuestionSvc
 ) {
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     fun createQuestion(
         @RequestBody @Valid req: CreateQuestionReq,
         auth: Authentication

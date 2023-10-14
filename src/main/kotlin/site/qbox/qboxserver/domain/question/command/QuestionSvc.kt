@@ -11,7 +11,7 @@ class QuestionSvc(
 ) {
     fun create(req: CreateQuestionReq, writer: String): IdRes<Long> {
 
-        val savedQuestion = questionRepo.save(Question(req.title, req.content, writer))
+        val savedQuestion = questionRepo.save(Question(req.title, req.content, req.lecture, writer))
         return IdRes(savedQuestion.id)
     }
 }
