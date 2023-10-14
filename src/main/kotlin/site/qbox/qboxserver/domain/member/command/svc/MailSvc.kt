@@ -4,11 +4,11 @@ import jakarta.mail.internet.MimeMessage
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.scheduling.annotation.Async
-import org.springframework.stereotype.Service
 import org.springframework.transaction.event.TransactionalEventListener
 import site.qbox.qboxserver.domain.member.command.dto.event.SignedUpMemberEvent
+import site.qbox.qboxserver.global.annotation.CommandService
 
-@Service
+@CommandService
 class MailSvc(
     private val mailSender: JavaMailSender,
 ) {

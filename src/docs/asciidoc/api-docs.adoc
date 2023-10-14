@@ -9,20 +9,75 @@ endif::[]
 :sectlinks:
 = Q BOX
 
+= departs
+== 학과 생성
+
+=== HTTP request
+
+include::{snippets}/create-depart/http-request.adoc[]
+include::{snippets}/create-depart/request-fields.adoc[]
+
+=== HTTP response
+
+include::{snippets}/create-depart/http-response.adoc[]
+include::{snippets}/create-depart/response-fields.adoc[]
+
+= lectures
+
+== 강의 생성
+
+=== HTTP request
+
+include::{snippets}/create-lecture/http-request.adoc[]
+include::{snippets}/create-lecture/request-fields.adoc[]
+
+=== HTTP response
+
+include::{snippets}/create-lecture/http-response.adoc[]
+include::{snippets}/create-lecture/response-fields.adoc[]
+
+= questions
+== 질문 생성
+=== HTTP request
+include::{snippets}/create-question/http-request.adoc[]
+include::{snippets}/create-question/request-fields.adoc[]
+
+=== HTTP response
+
+include::{snippets}/create-question/http-response.adoc[]
+include::{snippets}/create-question/response-fields.adoc[]
+
+= univ
+== 대학 생성
+=== HTTP request
+include::{snippets}/create-univ/http-request.adoc[]
+include::{snippets}/create-univ/request-fields.adoc[]
+
+=== HTTP response
+
+include::{snippets}/create-univ/http-response.adoc[]
+include::{snippets}/create-univ/response-fields.adoc[]
+
 = members
-[[resources-members]]
 
 == 회원가입
+
 === HTTP request
+
 include::{snippets}/signup/http-request.adoc[]
 include::{snippets}/signup/request-fields.adoc[]
+
 === HTTP response
+
 include::{snippets}/signup/http-response.adoc[]
 
 == 본인 조회
+
 === HTTP request
+
 include::{snippets}/get-me/http-request.adoc[]
 
 === HTTP response
+
 include::{snippets}/get-me/http-response.adoc[]
 include::{snippets}/get-me/response-fields.adoc[]

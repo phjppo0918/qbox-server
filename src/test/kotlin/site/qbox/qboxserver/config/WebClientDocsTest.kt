@@ -6,11 +6,13 @@ import io.kotest.extensions.spring.SpringExtension
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
 import org.springframework.restdocs.operation.preprocess.Preprocessors.*
 import org.springframework.restdocs.snippet.Snippet
 import org.springframework.security.test.context.support.WithMockUser
@@ -25,8 +27,10 @@ import java.nio.charset.StandardCharsets
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
 @WithMockUser(username = "defaultUser")
+@MockBean(JpaMetamodelMappingContext::class)
 abstract class WebClientDocsTest : DescribeSpec() {
     override fun extensions() = listOf(SpringExtension)
+
     @Autowired
     private lateinit var mockMvc: MockMvc
     private val mapper = jacksonObjectMapper()
@@ -43,16 +47,18 @@ abstract class WebClientDocsTest : DescribeSpec() {
         return mockMvc.perform(requestBuilder)
     }
 
-    protected fun performGet(endpoint: String) : ResultActions {
+    protected fun performGet(endpoint: String): ResultActions {
         return mockMvc.perform(get(endpoint))
     }
+
     protected fun performFormData(method: HttpMethod, endpoint: String, filename: String): ResultActions {
         return mockMvc.perform(
             multipart(method, endpoint)
                 .file(filename, ByteArray(0))
                 .with(csrf())
                 .contentType(MediaType.MULTIPART_FORM_DATA)
-                .characterEncoding(StandardCharsets.UTF_8))
+                .characterEncoding(StandardCharsets.UTF_8)
+        )
     }
 
     private fun generateBody(obj: Any) = mapper.writeValueAsString(obj)

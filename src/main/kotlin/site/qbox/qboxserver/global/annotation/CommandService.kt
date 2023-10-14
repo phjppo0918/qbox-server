@@ -1,4 +1,4 @@
-package xyz.questionbox.back.global.annotation
+package site.qbox.qboxserver.global.annotation
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
