@@ -2,6 +2,7 @@ package site.qbox.qboxserver.domain.univ.command
 
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
+import org.junit.jupiter.api.DisplayName
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.*
@@ -11,6 +12,7 @@ import site.qbox.qboxserver.domain.univ.command.dto.CreateUnivReq
 import site.qbox.qboxserver.global.dto.IdRes
 
 @WebMvcTest(UnivCtrl::class)
+@DisplayName("UnivCtrl")
 class UnivCtrlTest : WebClientDocsTest() {
 
     @MockkBean

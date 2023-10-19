@@ -17,4 +17,9 @@ class MemberAuth(
     override fun isAccountNonLocked() = true
     override fun isCredentialsNonExpired() = true
     override fun isEnabled() = true
+
+    val name: String
+        get() = auth.email
+    val group : String
+        get() = auth.group
 }

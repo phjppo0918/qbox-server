@@ -1,5 +1,6 @@
 package site.qbox.qboxserver.domain.lecture.command
 
+import org.junit.jupiter.api.DisplayName
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.restdocs.payload.JsonFieldType
@@ -10,6 +11,7 @@ import site.qbox.qboxserver.config.WebClientDocsTest
 import site.qbox.qboxserver.domain.lecture.command.dto.CreateLectureReq
 
 @WebMvcTest(LectureCtrl::class)
+@DisplayName("LectureCtrl")
 class LectureCtrlTest : WebClientDocsTest() {
 
     @MockBean

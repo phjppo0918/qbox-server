@@ -2,6 +2,7 @@ package site.qbox.qboxserver.domain.depart.command
 
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
+import org.junit.jupiter.api.DisplayName
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.*
@@ -12,6 +13,7 @@ import site.qbox.qboxserver.global.dto.IdRes
 
 
 @WebMvcTest(DepartCtrl::class)
+@DisplayName("DepartCtrl")
 class DepartCtrlTest : WebClientDocsTest() {
 
     @MockkBean

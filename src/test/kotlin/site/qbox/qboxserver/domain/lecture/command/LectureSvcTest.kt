@@ -3,12 +3,14 @@ package site.qbox.qboxserver.domain.lecture.command
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.DisplayName
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import site.qbox.qboxserver.domain.lecture.command.dto.CreateLectureReq
 import site.qbox.qboxserver.domain.lecture.command.entity.LectureId
 
 @SpringBootTest
+@DisplayName("LectureSvc")
 class LectureSvcTest : DescribeSpec() {
     override fun extensions() = listOf(SpringExtension)
 
