@@ -5,7 +5,7 @@ import io.mockk.every
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.*
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import site.qbox.qboxserver.config.WebClientDocsTest
 import site.qbox.qboxserver.domain.depart.command.dto.CreateDepartReq
 import site.qbox.qboxserver.global.dto.IdRes
@@ -24,7 +24,7 @@ class DepartCtrlTest : WebClientDocsTest() {
 
             val action = performPost("/departs", req)
 
-            action.andExpect(MockMvcResultMatchers.status().isCreated())
+            action.andExpect(status().isCreated())
 
             action.andDo(
                 print(

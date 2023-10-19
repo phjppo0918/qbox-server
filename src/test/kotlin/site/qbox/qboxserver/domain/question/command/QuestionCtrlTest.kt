@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.*
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import site.qbox.qboxserver.config.WebClientDocsTest
 import site.qbox.qboxserver.domain.lecture.command.entity.LectureId
 import site.qbox.qboxserver.domain.question.command.dto.CreateQuestionReq
@@ -26,7 +26,7 @@ class QuestionCtrlTest : WebClientDocsTest() {
 
             val action = performPost("/questions", req)
 
-            action.andExpect(MockMvcResultMatchers.status().isCreated())
+            action.andExpect(status().isCreated())
 
             action.andDo(
                 print(

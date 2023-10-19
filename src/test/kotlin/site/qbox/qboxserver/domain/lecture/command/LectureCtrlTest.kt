@@ -5,7 +5,7 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import org.springframework.restdocs.payload.PayloadDocumentation.requestFields
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import site.qbox.qboxserver.config.WebClientDocsTest
 import site.qbox.qboxserver.domain.lecture.command.dto.CreateLectureReq
 
@@ -21,7 +21,7 @@ class LectureCtrlTest : WebClientDocsTest() {
 
             val action = performPost("/lectures", req)
 
-            action.andExpect(MockMvcResultMatchers.status().isCreated())
+            action.andExpect(status().isCreated())
 
             action.andDo(
                 print(
