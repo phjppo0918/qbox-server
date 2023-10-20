@@ -2,7 +2,7 @@ package site.qbox.qboxserver.domain.depart.query
 
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
-import org.junit.jupiter.api.DisplayName
+import io.kotest.core.spec.DisplayName
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.restdocs.payload.JsonFieldType
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath

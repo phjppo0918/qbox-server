@@ -1,6 +1,6 @@
 package site.qbox.qboxserver.domain.lecture.command
 
-import org.junit.jupiter.api.DisplayName
+import io.kotest.core.spec.DisplayName
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.restdocs.payload.JsonFieldType

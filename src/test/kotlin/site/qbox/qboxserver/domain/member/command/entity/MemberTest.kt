@@ -3,7 +3,7 @@ package site.qbox.qboxserver.domain.member.command.entity
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.DisplayName
+import io.kotest.core.spec.DisplayName
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import site.qbox.qboxserver.domain.member.command.exception.NotMatchPasswordException
 

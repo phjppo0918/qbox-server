@@ -1,11 +1,13 @@
 package site.qbox.qboxserver.global.ctrl
 
+import io.kotest.core.annotation.DisplayName
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import site.qbox.qboxserver.config.WebClientDocsTest
 
 
 @WebMvcTest(ApiDocsController::class)
+@DisplayName("ApiDocsController")
 class ApiDocsControllerTest : WebClientDocsTest() {
 
 

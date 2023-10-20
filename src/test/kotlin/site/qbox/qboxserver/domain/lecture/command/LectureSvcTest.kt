@@ -3,7 +3,7 @@ package site.qbox.qboxserver.domain.lecture.command
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.DisplayName
+import io.kotest.core.spec.DisplayName
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import site.qbox.qboxserver.domain.lecture.command.dto.CreateLectureReq

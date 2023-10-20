@@ -1,5 +1,6 @@
 package site.qbox.qboxserver.global.entity
 
+import io.kotest.core.annotation.DisplayName
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.nulls.shouldNotBeNull
@@ -12,6 +13,7 @@ import site.qbox.qboxserver.domain.question.command.entity.Question
 import java.time.LocalDateTime
 
 @DataJpaTest
+@DisplayName("BaseEntity")
 class BaseEntityTest : DescribeSpec() {
 
     override fun extensions() = listOf(SpringExtension)

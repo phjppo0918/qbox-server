@@ -1,9 +1,11 @@
 package site.qbox.qboxserver.domain.question.command.entity
 
+import io.kotest.core.spec.DisplayName
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import site.qbox.qboxserver.domain.lecture.command.entity.LectureId
 
+@DisplayName("Question")
 class QuestionTest : DescribeSpec({
 
     it("내용 변경을 수행한다 ") {
