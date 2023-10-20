@@ -47,6 +47,8 @@ class UserDetailServiceImplTest : DescribeSpec() {
                 passwordEncoder.matches(targetPassword, result.password) shouldBe true
 
                 result.authorities shouldContain SimpleGrantedAuthority(Role.USER.name)
+                result.name shouldBe result.name
+                result.group shouldBe result.group
                 result.isAccountNonExpired shouldBe true
                 result.isAccountNonLocked shouldBe true
                 result.isCredentialsNonExpired shouldBe true

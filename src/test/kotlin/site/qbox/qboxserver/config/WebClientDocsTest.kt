@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.context.annotation.Import
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
@@ -15,18 +16,20 @@ import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
 import org.springframework.restdocs.operation.preprocess.Preprocessors.*
 import org.springframework.restdocs.snippet.Snippet
-import org.springframework.security.test.context.support.WithMockUser
+import org.springframework.security.test.context.support.WithUserDetails
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActions
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart
+import org.springframework.util.MultiValueMap
 import java.nio.charset.StandardCharsets
 
 @ContextConfiguration
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
-@WithMockUser(username = "defaultUser")
+@Import(TestSecurityConfig::class)
+@WithUserDetails(value = "username", userDetailsServiceBeanName = "testUserDetailService")
 @MockBean(JpaMetamodelMappingContext::class)
 abstract class WebClientDocsTest : DescribeSpec() {
     override fun extensions() = listOf(SpringExtension)
@@ -49,6 +52,10 @@ abstract class WebClientDocsTest : DescribeSpec() {
 
     protected fun performGet(endpoint: String): ResultActions {
         return mockMvc.perform(get(endpoint))
+    }
+
+    protected fun performGet(endpoint: String, params: MultiValueMap<String, String>): ResultActions {
+        return mockMvc.perform(get(endpoint).params(params))
     }
 
     protected fun performFormData(method: HttpMethod, endpoint: String, filename: String): ResultActions {
