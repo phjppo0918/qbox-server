@@ -55,6 +55,7 @@ abstract class WebClientDocsTest : DescribeSpec() {
     }
 
     protected fun performGet(endpoint: String, params: MultiValueMap<String, String>): ResultActions {
+        
         return mockMvc.perform(get(endpoint).params(params))
     }
 
