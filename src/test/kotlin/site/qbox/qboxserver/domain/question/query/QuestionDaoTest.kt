@@ -71,7 +71,7 @@ class QuestionDaoTest : DescribeSpec() {
 
                 result.id shouldBe any.id
                 result.lecture.code shouldBe any.lecture.code
-                result.writer.email shouldBe any.writer
+                result.writer.email shouldBe any.writerId
             }
         }
 
