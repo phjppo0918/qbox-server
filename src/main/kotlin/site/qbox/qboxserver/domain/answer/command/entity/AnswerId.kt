@@ -4,5 +4,7 @@ import jakarta.persistence.Embeddable
 import java.io.Serializable
 
 @Embeddable
-class AnswerId(questionId: Long, writerId: String) : Serializable {
-}
+data class AnswerId(
+    val questionId: Long,
+    val writerId: String
+) : Serializable

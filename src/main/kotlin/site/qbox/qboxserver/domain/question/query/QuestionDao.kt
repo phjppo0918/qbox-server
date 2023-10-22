@@ -26,7 +26,7 @@ class QuestionDao (
                 QMemberRes(member.email, member.nickname)))
             .from(question)
             .where(question.lecture.eq(LectureId(code, depart)))
-            .join(member).on(question.writer.eq(member.email))
+            .join(member).on(question.writerId.eq(member.email))
             .offset(pageable.offset)
             .limit(pageable.pageSize.toLong())
             .fetch()
@@ -46,7 +46,7 @@ class QuestionDao (
             ))
             .from(question)
             .where(question.id.eq(id))
-            .join(member).on(question.writer.eq(member.email))
+            .join(member).on(question.writerId.eq(member.email))
             .join(lecture).on(question.lecture.eq(lecture.id))
             .fetchFirst()
     }
