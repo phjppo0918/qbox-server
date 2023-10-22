@@ -50,13 +50,17 @@ abstract class WebClientDocsTest : DescribeSpec() {
         return mockMvc.perform(requestBuilder)
     }
 
-    protected fun performGet(endpoint: String): ResultActions {
-        return mockMvc.perform(get(endpoint))
+    protected fun performGet(endpoint: String, vararg urlValue: String): ResultActions {
+        return mockMvc.perform(get(endpoint, *urlValue))
     }
 
-    protected fun performGet(endpoint: String, params: MultiValueMap<String, String>): ResultActions {
-        
-        return mockMvc.perform(get(endpoint).params(params))
+    protected fun performGet(
+        endpoint: String,
+        params: MultiValueMap<String, String>,
+        vararg urlValue: String,
+    ): ResultActions {
+
+        return mockMvc.perform(get(endpoint, *urlValue).params(params))
     }
 
     protected fun performFormData(method: HttpMethod, endpoint: String, filename: String): ResultActions {

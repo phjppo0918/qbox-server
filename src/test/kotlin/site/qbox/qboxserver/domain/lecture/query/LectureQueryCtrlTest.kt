@@ -47,7 +47,7 @@ class LectureQueryCtrlTest : WebClientDocsTest() {
                     queryParameters(
                         parameterWithName("depart").description("학과 ID"),
                         parameterWithName("page").description("page 번호"),
-                        parameterWithName("size").description("페이지 당 보여줄 컨텐츠 수"),
+                        parameterWithName("size").description("페이지 당 보여줄 컨텐츠 수(default: 10)"),
                     ),
                     responseFields(
                         fieldWithPath("[].name").type(JsonFieldType.STRING).description("과목명"),

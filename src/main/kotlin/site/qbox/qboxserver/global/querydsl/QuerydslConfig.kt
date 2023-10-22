@@ -1,4 +1,4 @@
-package xyz.questionbox.back.global.querydsl
+package site.qbox.qboxserver.global.querydsl
 
 import com.querydsl.jpa.impl.JPAQueryFactory
 import jakarta.persistence.EntityManager
